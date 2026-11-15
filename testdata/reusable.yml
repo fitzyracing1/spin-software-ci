@@ -1,0 +1,6 @@
+name: reusable caller
+on: push
+jobs:
+  call:
+    uses: octo-org/example-repo/.github/workflows/workflow-b.yml@ce5f92a0122c87e74dec86a2534f0bae8c1a9a4c
+    timeout-minutes: 15

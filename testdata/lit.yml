@@ -1,0 +1,10 @@
+# Pinned to a full SHA, has runs-on and timeout-minutes.
+name: lit
+on: [push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0591761c9d40b0c27b
+      - run: python -m pytest -q
