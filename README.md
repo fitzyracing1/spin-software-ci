@@ -6,7 +6,17 @@
 
 Read a GitHub Actions workflow or log and flag common failure causes by rules. Lit or dark: same input, same answer, no API, no cost, works offline.
 
-The checker ships in a pull request. It will read a workflow YAML or a job log and print LIT or DARK with the rules that fired.
+`python software_ci.py` reads a workflow YAML or a job log and prints LIT or DARK plus the rules that fired. It does not call the GitHub API. Warnings alone still count as LIT; any error is DARK (exit code 1).
+
+```sh
+python software_ci.py testdata/lit.yml
+python software_ci.py testdata/dark.yml
+python software_ci.py --log testdata/dark.log
+```
+
+Workflow rules include: a job missing `runs-on:` (unless it calls a reusable workflow), actions pinned to `main`/`master`/`HEAD` or left unpinned, echoing `${{ secrets.* }}`, piping curl/wget into a shell, and `pull_request_target` checking out PR code. Warnings include a missing `timeout-minutes:`, a moving version tag such as `@v4`, deprecated `::set-output`, and `permissions: write-all`.
+
+Log rules include: out of memory, timeouts, `ModuleNotFoundError`, permission errors, rate limits, disk full, checkout failures, npm errors, pytest failures, `##[error]`, and a non-zero step exit code.
 
 ## Run it
 

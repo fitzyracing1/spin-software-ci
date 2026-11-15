@@ -1,0 +1,4 @@
+Run python -m pytest -q
+/opt/hostedtoolcache/Python/3.12.0/x64/bin/python: No module named pytest
+ModuleNotFoundError: No module named 'pytest'
+##[error]Process completed with exit code 1.
